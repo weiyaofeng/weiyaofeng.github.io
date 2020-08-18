@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <title>Document</title>
     </head>
-    <script src="build/jquery-1.11.1.min.js"></script>
-    <script src="build/tracking-min.js"></script>
-    <script src="build/data/face-min.js"></script>
+    <script src="../build/jquery-1.11.1.min.js"></script>
+    <script src="../build/tracking-min.js"></script>
+    <script src="../build/data/face-min.js"></script>
     <style>
         * {
             padding: 0;
@@ -50,14 +50,14 @@
                 tracking.track('#video', tracker, {
                     camera: true
                 });
-                var count=0;
+      			var count=0;
                 var flag = true;
                 tracker.on('track', function(event) {
                     // if (event.data.length === 0) {
                     console.log(count)
                     if (event.data.length>0&count <= 20) {
 
-                        context.clearRect(0, 0, canvas.width, canvas.height);
+                    	context.clearRect(0, 0, canvas.width, canvas.height);
                         event.data.forEach(function(rect) {
                             context.strokeStyle = '#ff0000';
                             context.strokeRect(rect.x, rect.y, rect.width, rect.height);
@@ -65,23 +65,23 @@
                             //console.log(rect.x, rect.width, rect.y, rect.height);
                         });
                         if (count < 0) count = 0
-                        count += 1
-                        if (count > 20) {
-                            if (flag) {
-                                $('#text1').text('已检测到人脸，正在登录')
-                                // console.log("已检测到人脸，正在登录");
-                                getPhoto();
-                                flag = false;
-                                setTimeout(function() {
-                                    flag = true;
-                                }, time);
-                            } else {//console.log("冷却中");
-                            }
-                        }
+            			count += 1
+	            		if (count > 20) {
+	            			if (flag) {
+	                        	$('#text1').text('已检测到人脸，正在登录')
+	                            // console.log("已检测到人脸，正在登录");
+	                            getPhoto();
+	                            flag = false;
+	                            setTimeout(function() {
+	                                flag = true;
+	                            }, time);
+	                        } else {//console.log("冷却中");
+	                        }
+	            		}
                         
                     } else {
                         context.clearRect(0, 0, canvas.width, canvas.height);
-                        
+                    	
                         count -= 1
                         if (count < 0) $('#text1').text('请您保持脸部在画面中央')
                     }
